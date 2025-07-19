@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Home page</title>
+    <style>
+      .container{
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+         border: solid black;
+         border-radius: 50px;
+         width: 500px;
+         padding: 30px;
+      }
+      body{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: rgb(247, 199, 247);
+        display: flex;
+       flex-direction: column;
+       align-items: center;  
+      }
+      h1{
+        color: blueviolet;
+      }
+      .msg{
+        color:red;
+      }
+      a{
+        text-decoration: none;
+        margin-bottom: 3px;
+      }
+      .btn{
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        height: 22px;
+      }
+      .text{
+        font-weight: bold;
+      }
+      .History{
+        margin-top: 30%;
+      }
+    </style>
+</head>
+<body>
+   <h1 >URL Shortner</h1>
+    <div class="container">
+    <div>
+      <form method="post" action="/url">
+        <label for="">Enter your original URL:</label>
+        <input type="text" placeholder="https://example.com" name="url">
+        <button class="btn" type="submit">
+        Generate
+      </button>
+      </form>
+    </div>
+      <% if (locals.id) { %>
+      <p><span class="text">Short URL generated:</span></p>
+      <span><a href="http://localhost:8000/url/<%=id%>">http://localhost:8000/url/<%=id%></a></span>
+    <% }else if(locals.msg){ %>
+      <p class="msg"><%=msg%></p>
+      <% } %>
+      <div>
+        <form action="/list" method="get">
+          <button class="btn History">History</button>
+        </form>
+      </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>History</title>
+    <style>
+        body{
+        font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        background-color: rgb(247, 199, 247);
+        display: flex;
+       flex-direction: column;
+       align-items: center;  
+      }
+      h1{
+        color: blueviolet;
+      }
+      div{
+        border: solid black;
+        border-radius: 3px;
+      }
+      tr:nth-child(even) {
+  background-color: rgb(205, 159, 248);
+}
+tr {
+  border-bottom: 1px solid #ddd;
+}
+.btn{
+        background-color: black;
+        color: white;
+        border: none;
+        border-radius: 10px;
+        height: 22px;
+      }
+    </style>
+</head>
+<body>
+    <form action="/" method="get"><button class="btn">Home</button></form>
+    <h1>History</h1>
+    <div>
+      <% if (locals.urls) { %>
+        <table>
+          <thead>
+            <th>
+              S.No
+            </th>
+            <th>
+              ShortId
+            </th>
+            <th>
+              Redirect
+            </th>
+            <th>
+              clicks
+            </th>
+          </thead>
+          <tbody>
+            <% urls.forEach((url,index) => { %>
+               <tr>
+                <td><%=index+1%></td>
+               <td><%=url.shortId%></td>
+               <td><%=url.redirectURL%></td>
+               <td><%=url.visitHistory.length%></td>
+               </tr>
+            <% }) %>
+          </tbody>
+        </table>
+      <% } %>
+    </div>
+</body>
+</html>
