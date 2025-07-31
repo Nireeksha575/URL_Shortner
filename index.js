@@ -5,9 +5,9 @@ const path=require("path");
 // const ejs=require("ejs");
 const url=require("./models/url")
 const cookieParser=require("cookie-parser");
-const {rescritToLoggedUserOnly,checkAuth}=require("./middlewares/auth");
+const { checkForAuthentication,restrictTo}=require("./middlewares/auth");
 
-const URLroute=require("./routes/url");
+const URLroute=require("./routes/url")  ;
 const StaticRoute=require("./routes/staticRouter");
 const userRoute=require("./routes/user");
 
@@ -19,13 +19,14 @@ app.set("view engine","ejs");
 app.set("views",path.resolve("./views"));
 
 //middlewares
-app.use(express.json())
-app.use(express.urlencoded({extended:false}))
-app.use(cookieParser())
+app.use(express.json());
+app.use(express.urlencoded({extended:false}));
+app.use(cookieParser());
+app.use(checkForAuthentication);
 
 //routes
-app.use('/url',rescritToLoggedUserOnly,URLroute);
-app.use('/',checkAuth,StaticRoute);
+app.use('/url',restrictTo(["NORMAL","ADMIN"]),URLroute);
+app.use('/',StaticRoute);
 app.use('/user',userRoute)
 
 // app.get('/test',async (req,res)=>{
